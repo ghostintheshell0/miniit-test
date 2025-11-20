@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8864348854193695236}
   - component: {fileID: 7997440958037214742}
   - component: {fileID: 1142186215013932218}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BaseBrick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.54, y: 0.28}
   m_EdgeRadius: 0
 --- !u!50 &7997440958037214742
 Rigidbody2D:
@@ -132,7 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4545002251569969443}
   - component: {fileID: 748213349355093377}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +149,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.54, y: 0.28, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5745845445046759315}
@@ -196,7 +196,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8773585, g: 0.71595764, b: 0.71595764, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

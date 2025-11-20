@@ -9,15 +9,15 @@ namespace miniit.Arcanoid
         public event Action<Brick> Dead = default;
 
         [SerializeField]
-        private int heals = 1;
+        protected int heals = 1;
 
         [SerializeField]
-        private int maxHeals = 1;
+        protected int maxHeals = 1;
 
         [SerializeField][ReadOnly]
-        private bool isDead = false;
+        protected bool isDead = false;
 
-        private void Die()
+        protected virtual void Die()
         {
             if(isDead)
             {
@@ -30,7 +30,7 @@ namespace miniit.Arcanoid
             Destroy(gameObject);
         }
 
-        public int Heals
+        public virtual int Heals
         {
             get => heals;
             set

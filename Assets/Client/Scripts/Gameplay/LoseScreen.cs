@@ -1,0 +1,35 @@
+using Doozy.Runtime.UIManager;
+using Doozy.Runtime.UIManager.Components;
+using Doozy.Runtime.UIManager.Containers;
+using TMPro;
+using UnityEngine;
+
+namespace miniit.Arcanoid
+{
+    public class LoseScreen : MonoBehaviour
+    {
+        [SerializeField]
+        private GameController gameController = default;
+        [SerializeField]
+        private UIView screen = default;
+        [SerializeField]
+        private TMP_Text scores = default;
+        [SerializeField]
+        private UIButton menu = default;
+
+        private void Start()
+        {
+            gameController.Lost += Show;
+
+            UIBehaviour behaviour = menu.behaviours.AddBehaviour(UIBehaviour.Name.PointerClick);
+            behaviour.Event = new UnityEngine.Events.UnityEvent();
+            behaviour.Event.AddListener(gameController.ToMenu);
+        }
+
+        private void Show(int scores)
+        {
+            screen.Show();
+            this.scores.text = scores.ToString();
+        }
+    }
+}

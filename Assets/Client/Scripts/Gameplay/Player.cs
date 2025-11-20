@@ -7,6 +7,7 @@ namespace miniit.Arcanoid
     {
         [SerializeField]
         private Rigidbody2D body = default;
+
         [SerializeField]
         private Transform ballsSpawnPoint = default;
         [SerializeField]
@@ -16,8 +17,15 @@ namespace miniit.Arcanoid
         [SerializeField]
         private int startBalls = 1;
         private List<Ball> ballsForLaunch;
-        [SerializeField] private float maxSpeed = 5f;
-        [SerializeField] private float stoppongDistance = 0.2f;
+
+        [SerializeField]
+        private float maxSpeed = 5f;
+        [SerializeField]
+        private float stoppongDistance = 0.2f;
+
+        [SerializeField]
+        private float speedBonus = 0.1f;
+
 
         public void LaunchBalls()
         {
@@ -26,6 +34,7 @@ namespace miniit.Arcanoid
                 Ball ball = ballsForLaunch[i];
                 ball.transform.SetParent(default);
                 ball.Body.simulated = true;
+                ball.Speed = ball.startSpeed;
                 ball.Body.velocity = GetRandomDirection() * ball.startSpeed;
             }
 
@@ -70,6 +79,19 @@ namespace miniit.Arcanoid
             Quaternion rot = Quaternion.AngleAxis(angle, Vector3.forward);
             Vector3 direction = rot * launchDirection;
             return direction;
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if(collision.collider.TryGetComponent(out Ball ball))
+            {
+                ball.Speed += speedBonus;
+                
+
+                var direction = (ball.transform.position-transform.position).normalized;
+                ball.Direction = direction;
+
+            }
         }
 
         public Rigidbody2D Body

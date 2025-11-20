@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1628205780891710659
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 748213349355093377, guid: 3fb7a20e7045aa8f5831506e73ca8d09, type: 3}
+      propertyPath: m_Color.b
+      value: 0.27612138
+      objectReference: {fileID: 0}
+    - target: {fileID: 748213349355093377, guid: 3fb7a20e7045aa8f5831506e73ca8d09, type: 3}
+      propertyPath: m_Color.g
+      value: 0.8018868
+      objectReference: {fileID: 0}
+    - target: {fileID: 748213349355093377, guid: 3fb7a20e7045aa8f5831506e73ca8d09, type: 3}
+      propertyPath: m_Color.r
+      value: 0.5124487
+      objectReference: {fileID: 0}
+    - target: {fileID: 1568386734587849873, guid: 3fb7a20e7045aa8f5831506e73ca8d09, type: 3}
+      propertyPath: m_Name
+      value: BonusBrick Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5745845445046759315, guid: 3fb7a20e7045aa8f5831506e73ca8d09, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5745845445046759315, guid: 3fb7a20e7045aa8f5831506e73ca8d09, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 5745845445046759315, guid: 3fb7a20e7045aa8f5831506e73ca8d09, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5745845445046759315, guid: 3fb7a20e7045aa8f5831506e73ca8d09, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5745845445046759315, guid: 3fb7a20e7045aa8f5831506e73ca8d09, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5745845445046759315, guid: 3fb7a20e7045aa8f5831506e73ca8d09, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5745845445046759315, guid: 3fb7a20e7045aa8f5831506e73ca8d09, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5745845445046759315, guid: 3fb7a20e7045aa8f5831506e73ca8d09, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5745845445046759315, guid: 3fb7a20e7045aa8f5831506e73ca8d09, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5745845445046759315, guid: 3fb7a20e7045aa8f5831506e73ca8d09, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1142186215013932218, guid: 3fb7a20e7045aa8f5831506e73ca8d09, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1568386734587849873, guid: 3fb7a20e7045aa8f5831506e73ca8d09, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4208155562846823659}
+  m_SourcePrefab: {fileID: 100100000, guid: 3fb7a20e7045aa8f5831506e73ca8d09, type: 3}
+--- !u!1 &242222321920809042 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1568386734587849873, guid: 3fb7a20e7045aa8f5831506e73ca8d09, type: 3}
+  m_PrefabInstance: {fileID: 1628205780891710659}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4208155562846823659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242222321920809042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fb28f243afaf9588838a4efa6f95962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heals: 1
+  maxHeals: 1
+  isDead: 0
+  bonusesList: {fileID: 11400000, guid: 67d2ad44599069f72ba20aa1fd0da94a, type: 2}
