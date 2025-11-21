@@ -17,6 +17,8 @@ namespace miniit.Arcanoid
         [SerializeField][ReadOnly]
         protected bool isDead = false;
 
+        public int pointPerKill = 1;
+
         protected virtual void Die()
         {
             if(isDead)

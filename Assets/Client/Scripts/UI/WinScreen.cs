@@ -32,7 +32,7 @@ namespace miniit.Arcanoid
             behaviour.Event.AddListener(gameController.NextLevel);
         }
 
-        private void Show(int scores)
+        public void Show(int scores)
         {
             screen.Show();
             this.scores.text = scores.ToString();

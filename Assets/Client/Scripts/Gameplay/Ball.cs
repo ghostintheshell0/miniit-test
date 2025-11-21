@@ -12,13 +12,13 @@ namespace miniit.Arcanoid
         private new CircleCollider2D collider = default;
 
         [SerializeField]
-        private TMP_Text DebugField = default;
-
-        public float startSpeed = 5;
-        public int Damage = 1;
+        private Transform pivot = default;
 
         [SerializeField]
-        private float defaultRadius = 1f;
+        private TMP_Text DebugField = default;
+
+        public float startSpeed = 5f;
+        public int Damage = 1;
         
         [SerializeField]
         private float minScale = 0.5f;
@@ -28,7 +28,15 @@ namespace miniit.Arcanoid
         [SerializeField]
         private float scale = 1f;
         [SerializeField]
-        private float speed;
+        private float speed = 1f;
+        [SerializeField]
+        private float minYSpeed = 0.1f;
+        [SerializeField]
+        private float antiStuckModeDelay = 10f;
+
+        [SerializeField]
+        private float lastBrickHitTime = float.MinValue;
+
 
         private void Awake()
         {
@@ -37,30 +45,35 @@ namespace miniit.Arcanoid
 
         protected virtual void OnCollisionEnter2D(Collision2D collision)
         {
-            if(collision.collider.TryGetComponent<Brick>(out var brick))
+            if(collision.collider.TryGetComponent(out Brick brick))
             {
                 brick.Heals -= Damage;
+                lastBrickHitTime = Time.fixedTime;
+            }
+            else if(collision.collider.TryGetComponent(out Platform platform))
+            {
+                lastBrickHitTime = Time.fixedTime;
             }
             Speed = speed;
-
         }
 
         public float Speed
         {
-            get => body.velocity.magnitude;
+            get => speed;
             set
             {
                 speed = value;
                 Vector2 direction = body.velocity.normalized;
-                body.velocity = direction * value;
+                body.velocity = direction * speed;
             }
         }
+
         public Vector2 Direction
         {
             get => body.velocity.normalized;
             set
             {
-                body.velocity = value * Speed;
+                body.velocity = value.normalized * Speed;
             }
         }
 
@@ -81,14 +94,46 @@ namespace miniit.Arcanoid
             }
         }
 
-        private void Update()
+        public bool Simulated
         {
-            DebugField.text = $"{Speed:F2}";
+            get => body.simulated;
+            set
+            {
+                if(value == body.simulated)
+                {
+                    return;
+                }
+
+                body.simulated = value;
+
+                if(body.simulated)
+                {
+                    lastBrickHitTime = Time.fixedTime;
+                }
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            DebugField.text = $"{body.velocity.magnitude:F2}";
+            if(body.simulated)
+            {
+                if(lastBrickHitTime + antiStuckModeDelay < Time.fixedTime)
+                {
+                    Vector2 velocity = body.velocity;
+                    velocity.y += Mathf.Sign(velocity.y) * minYSpeed * Time.fixedDeltaTime;
+                }
+            }
         }
 
         public Rigidbody2D Body
         {
             get => body;
+        }
+        
+        public Transform Pivot
+        {
+            get => pivot;
         }
     }
 }

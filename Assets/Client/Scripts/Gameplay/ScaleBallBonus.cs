@@ -6,9 +6,9 @@ namespace miniit.Arcanoid
     {
         public float Multipler;
 
-        protected override void Apply(Player player)
+        protected override void Apply(Platform platform)
         {
-            Debug.Log($"scale x{Multipler}");
+            platform.player.BallsSize *= Multipler;
         }
     }
 }

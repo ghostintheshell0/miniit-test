@@ -6,14 +6,14 @@ namespace miniit.Arcanoid
     {
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if(collision.TryGetComponent(out Player player))
+            if(collision.TryGetComponent(out Platform platform))
             {
-                Apply(player);
+                Apply(platform);
                 Destroy(gameObject);
             }
         }
 
-        protected virtual void Apply(Player player)
+        protected virtual void Apply(Platform platform)
         {
 
         }

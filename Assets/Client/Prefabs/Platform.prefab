@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 6000213652207805300}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.491, z: 0}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -125,10 +125,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5732722693689623654}
   - component: {fileID: 3945004077578160395}
-  - component: {fileID: -1516556054205836303}
   - component: {fileID: 1132663019847013444}
+  - component: {fileID: 293317621786641996}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -178,26 +178,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 6
---- !u!114 &-1516556054205836303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6950798636155743698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bebd1ac877fe90fb96a4e8f2eb88aef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  body: {fileID: 3945004077578160395}
-  ballsSpawnPoint: {fileID: 88432830592473682}
-  launchDirection: {x: 0, y: 1}
-  launchAngle: 75.16
-  startBalls: 1
-  maxSpeed: 5
-  stoppongDistance: 0.2
-  speedBonus: 0.1
 --- !u!60 &1132663019847013444
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -247,3 +227,33 @@ PolygonCollider2D:
       - {x: 1, y: -0.2}
       - {x: -1, y: -0.2}
   m_UseDelaunayMesh: 0
+--- !u!114 &293317621786641996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6950798636155743698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e03d58c3d73a76104b98b6bff101625f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player:
+    initData: {fileID: 0}
+    platform: {fileID: 0}
+    scores: 0
+    lifes: 3
+    ballsSpeed: 4
+    ballsSize: 1
+  body: {fileID: 3945004077578160395}
+  ballsSpawnPoint: {fileID: 88432830592473682}
+  launchDirection: {x: 0, y: 1}
+  launchAngle: 60
+  connectedBalls: []
+  maxSpeed: 5
+  stoppongDistance: 0.2
+  speedBonus: 0.46
+  minSize: 0.5
+  maxSize: 5
+  size: 1
