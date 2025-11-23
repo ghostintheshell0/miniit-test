@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace miniit.Arcanoid
+namespace miniIT.Arcanoid
 {
     public class KillZone : MonoBehaviour
     {

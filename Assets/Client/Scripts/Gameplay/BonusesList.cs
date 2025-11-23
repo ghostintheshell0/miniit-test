@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace miniit.Arcanoid
+namespace miniIT.Arcanoid
 {
     [CreateAssetMenu(menuName = "Game/Bonuses list")]
     public class BonusesList : ScriptableObject

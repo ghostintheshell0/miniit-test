@@ -1,14 +1,24 @@
 using UnityEngine;
+using VContainer;
 
-namespace miniit.Arcanoid
+namespace miniIT.Arcanoid
 {
     public class ScaleBallBonus : BaseBonus
     {
-        public float Multipler;
+        public float Multipler = 1f;
+
+        private LevelController levelController = default;
+        
+        [Inject]
+        public override void Inject(IObjectResolver resolver)
+        {
+            base.Inject(resolver);
+            levelController = resolver.Resolve<LevelController>();
+        }
 
         protected override void Apply(Platform platform)
         {
-            platform.player.BallsSize *= Multipler;
+            levelController.BallsSize *= Multipler;
         }
     }
 }

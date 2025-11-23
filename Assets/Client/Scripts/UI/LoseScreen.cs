@@ -3,13 +3,12 @@ using Doozy.Runtime.UIManager.Components;
 using Doozy.Runtime.UIManager.Containers;
 using TMPro;
 using UnityEngine;
+using VContainer;
 
-namespace miniit.Arcanoid
+namespace miniIT.Arcanoid
 {
     public class LoseScreen : MonoBehaviour
     {
-        [SerializeField]
-        private GameController gameController = default;
         [SerializeField]
         private UIView screen = default;
         [SerializeField]
@@ -17,19 +16,27 @@ namespace miniit.Arcanoid
         [SerializeField]
         private UIButton menu = default;
 
-        private void Start()
-        {
-            gameController.Lost += Show;
+        private GameController gameController = default;
 
+        public void Bind(GameController controller)
+        {
+            gameController = controller;
             UIBehaviour behaviour = menu.behaviours.AddBehaviour(UIBehaviour.Name.PointerClick);
             behaviour.Event = new UnityEngine.Events.UnityEvent();
-            behaviour.Event.AddListener(gameController.ToMenu);
+            behaviour.Event.AddListener(ToMenu);
         }
 
-        private void Show(int scores)
+        public void Show(int scores)
         {
             screen.Show();
             this.scores.text = scores.ToString();
+        }
+
+
+        private void ToMenu()
+        {
+            screen.InstantHide();
+            gameController.ToMenu();
         }
     }
 }

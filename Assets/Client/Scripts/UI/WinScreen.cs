@@ -3,13 +3,12 @@ using Doozy.Runtime.UIManager.Components;
 using Doozy.Runtime.UIManager.Containers;
 using TMPro;
 using UnityEngine;
+using VContainer;
 
-namespace miniit.Arcanoid
+namespace miniIT.Arcanoid
 {
     public class WinScreen : MonoBehaviour
     {
-        [SerializeField]
-        private GameController gameController = default;
         [SerializeField]
         private UIView screen = default;
         [SerializeField]
@@ -19,23 +18,37 @@ namespace miniit.Arcanoid
         [SerializeField]
         private UIButton next = default;
 
-        private void Start()
+        private GameController gameController = default;
+
+        public void Bind(GameController controller)
         {
-            gameController.Won += Show;
+            gameController = controller;
 
             UIBehaviour behaviour = menu.behaviours.AddBehaviour(UIBehaviour.Name.PointerClick);
             behaviour.Event = new UnityEngine.Events.UnityEvent();
-            behaviour.Event.AddListener(gameController.ToMenu);
+            behaviour.Event.AddListener(ToMenu);
 
-            behaviour = menu.behaviours.AddBehaviour(UIBehaviour.Name.PointerClick);
+            behaviour = next.behaviours.AddBehaviour(UIBehaviour.Name.PointerClick);
             behaviour.Event = new UnityEngine.Events.UnityEvent();
-            behaviour.Event.AddListener(gameController.NextLevel);
+            behaviour.Event.AddListener(NextLevel);
         }
 
         public void Show(int scores)
         {
             screen.Show();
             this.scores.text = scores.ToString();
+        }
+
+        private void ToMenu()
+        {
+            screen.InstantHide();
+            gameController.ToMenu();
+        }
+
+        private void NextLevel()
+        {
+            screen.InstantHide();
+            gameController.NextLevel();
         }
     }
 }

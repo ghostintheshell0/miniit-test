@@ -2,18 +2,24 @@ using System.Collections.Generic;
 using TriInspector;
 using UnityEngine;
 
-namespace miniit.Arcanoid
+namespace miniIT.Arcanoid
 {
-    public class Level : MonoBehaviour
+    public class LevelData : MonoBehaviour
     {
         public List<Brick> bricks = default;
-        public Vector2 BrickSize = new Vector2(50f, 43.10f);
+        public Vector2 BrickSize;
 
         [SerializeField]
         private KillZone killZone = default;
 
         [SerializeField]
         private Transform spawnPoint = default;
+
+        [SerializeField]
+        private Camera mainCamera = default;
+
+        [SerializeField]
+        private LevelValues levelValues = default;
 
         [Button]
         public void CollectBricks()
@@ -38,9 +44,13 @@ namespace miniit.Arcanoid
         {
             get => killZone;
         }
+
         public Transform SpawnPoint
         {
             get => spawnPoint;
         }
+
+        public Camera MainCamera => mainCamera;
+        public LevelValues LevelValues => levelValues;
     }
 }

@@ -1,12 +1,22 @@
-namespace miniit.Arcanoid
+using VContainer;
+
+namespace miniIT.Arcanoid
 {
     public class LifeBonus : BaseBonus
     {
-        public int Bonus;
+        public int Bonus = 1;
+
+        private LevelController levelController = default;
+        
+        [Inject]
+        public override void Inject(IObjectResolver resolver)
+        {
+            levelController = resolver.Resolve<LevelController>();
+        }
 
         protected override void Apply(Platform platform)
         {
-            platform.player.Lifes += Bonus;
+            levelController.Player.Lifes += Bonus;
         }
     }
 }

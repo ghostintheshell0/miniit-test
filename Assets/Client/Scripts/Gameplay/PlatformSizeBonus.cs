@@ -1,4 +1,4 @@
-namespace miniit.Arcanoid
+namespace miniIT.Arcanoid
 {
     public class PlatformSizeBonus : BaseBonus
     {

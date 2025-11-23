@@ -4,7 +4,7 @@ using Doozy.Runtime.UIManager.Components;
 using TMPro;
 using UnityEngine;
 
-namespace miniit.Arcanoid
+namespace miniIT.Arcanoid
 {
     public class HUD : MonoBehaviour
     {
@@ -18,10 +18,52 @@ namespace miniit.Arcanoid
         private TMP_Text lifes = default;
         [SerializeField]
         private UIButton pause = default;
+        [SerializeField]
+        private UIButton resume = default;
+
+
+        public void Bind(GameController controller)
+        {
+            controller.paused += OnPause;
+            controller.resumed += OnResume;
+            AddPauseClickListener(controller.Pause);
+            AddResumeClickListener(controller.Resume);
+        }
+
+        public void Unbind()
+        {
+            RemoveListeners();
+        }
+
+        public void SetPlayer(Player player)
+        {
+            player.ScoresChanged += ShowScores;
+            ShowScores(player.Scores);
+            player.LifesChanged += ShowLifes;
+            ShowLifes(player.Lifes);
+        }
+
+        public void SetLevelController(LevelController levelController)
+        {
+            levelController.BallsSpeedChanged += ShowSpeed;
+            ShowSpeed(levelController.BallsSpeed);
+        }
 
         public void ShowScores(int scores)
         {
             this.scores.text = scores.ToString();
+        }
+
+        public void OnPause()
+        {
+            pause.gameObject.SetActive(false);
+            resume.gameObject.SetActive(true);
+        }
+
+        public void OnResume()
+        {
+            pause.gameObject.SetActive(true);
+            resume.gameObject.SetActive(false);
         }
 
         public void ShowSpeed(float speed)
@@ -40,5 +82,19 @@ namespace miniit.Arcanoid
             b.Event = new UnityEngine.Events.UnityEvent();
             b.Event.AddListener(action.Invoke);
         }
+
+        public void AddResumeClickListener(Action action)
+        {
+            UIBehaviour b = resume.behaviours.AddBehaviour(UIBehaviour.Name.PointerClick);
+            b.Event = new UnityEngine.Events.UnityEvent();
+            b.Event.AddListener(action.Invoke);
+        }
+
+        private void RemoveListeners()
+        {
+            pause.behaviours.RemoveBehaviour(UIBehaviour.Name.PointerClick);
+            resume.behaviours.RemoveBehaviour(UIBehaviour.Name.PointerClick);
+        }
+
     }
 }

@@ -14,11 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   platformPrefab: {fileID: 293317621786641996, guid: 723943ec9054e1d9ea5bb07cfbad53c5, type: 3}
   startBallPrefab: {fileID: 3550036913254753916, guid: f09dba1c67df70aeca84fe0cd6ea805e, type: 3}
-  lifes: 3
-  minBallsSpeed: 2
-  maxBallSpeed: 20
-  startBallsSpeed: 4
+  lifes: 1
   startScores: 0
-  minBallsSize: 0.3
-  maxBallsSize: 3
-  startBallsSize: 1

@@ -1,186 +1,102 @@
 using System;
-using System.Collections.Generic;
-using TriInspector;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using VContainer;
 
-namespace miniit.Arcanoid
+namespace miniIT.Arcanoid
 {
-    public class GameController : MonoBehaviour
+    public class GameController
     {
-        public event Action<int> Lost = default;
-        public event Action<int> Won = default;
+        public event Action<int> lost = default;
+        public event Action<int> won = default;
+        public event Action started = default;
+        public event Action lostBalls = default;
+        public event Action paused = default;
+        public event Action resumed = default;
 
-        [SerializeField]
-        private InitPlayerData initPlayerData = default;
 
+        private GameConfig gameConfig = default;
+        private WinScreen winScreen = default;
+        private LoseScreen loseScreen = default;
+        private HUD hud = default;
 
-        [SerializeField]
-        private PlayerInput playerInput = default;
-
-        [SerializeField]
-        private Camera mainCamera = default;
-        [SerializeField][Scene]
-        private string MenuScene = default;
-
-        [SerializeField]
-        private Level level = default;
-
-        private List<Brick> bricks = default;
-
-        [SerializeField]
-        private HUD hud;
-        [SerializeField]
-        private WinScreen winScreen;
-        [SerializeField]
-        private LoseScreen loseScreen;
-
-        [SerializeReference]
         private Player player = default;
+        private LevelController levelController = default;
+        private IObjectResolver resolver = default;
 
-
-        private void Start()
+        [Inject]
+        public void Inject(IObjectResolver resolver)
         {
-            StartGame();
-            level.KillZone.ObjectEntered += KillZoneEnterListener;
-            playerInput.Fire.performed += OnFire;
-            playerInput.Fire.Enable();
-            Time.timeScale = 1f;
-
-            InitHud();
+            InitPlayerData initPlayerData = resolver.Resolve<InitPlayerData>();
+            player = new Player(initPlayerData);
+            this.resolver = resolver;
+            hud = resolver.Resolve<HUD>();
+            hud.Bind(this);
+            hud.SetPlayer(player);
+            gameConfig = resolver.Resolve<GameConfig>();
         }
 
-
-        private void StartGame()
+        public void Bind(LevelController levelController)
         {
-            player = new Player();
-            player.Platform = Instantiate(initPlayerData.platformPrefab, level.SpawnPoint.position, initPlayerData.platformPrefab.transform.rotation);
-            player.Platform.player = player;
-            player.Scores = initPlayerData.startScores;
-            player.Lifes = initPlayerData.lifes;
-            player.LifesChanged += LifesChangedListener;
-
-            bricks = new List<Brick>(level.bricks);
-            for(int i = 0; i < bricks.Count; i++)
-            {
-                bricks[i].Dead += BrickDestroyListener;
-            }
-            
-            Continue();
-            Respawn();
+            this.levelController = levelController;
+            levelController.Completed += ShowWinScreen;
+            levelController.Failed += ShowLoseScreen;
         }
 
-        private void InitHud()
-        {
-            player.ScoresChanged += hud.ShowScores;
-            hud.ShowScores(player.Scores);
-            player.SpeedChanged += hud.ShowSpeed;
-            hud.ShowSpeed(player.BallsSpeed);
-            player.LifesChanged += hud.ShowLifes;
-            hud.ShowLifes(player.Lifes);
-            hud.AddPauseClickListener(Pause);
-        }
-
-        private void OnFire(InputAction.CallbackContext context)
-        {
-            player.Platform.LaunchBalls();
-        }
-        private void Update()
-        {
-            Vector3 position = mainCamera.ScreenToWorldPoint(playerInput.PointerPosition);
-            player.Platform.MoveTo(position);
-        }
-
-        private void KillZoneEnterListener(Collider2D collider)
-        {
-            if(collider.TryGetComponent(out Ball ball))
-            {
-                Player.Balls.Remove(ball);
-                CheckLose();
-            }
-        }
-
-        private void BrickDestroyListener(Brick brick)
-        {
-            brick.Dead -= BrickDestroyListener;
-            bricks.Remove(brick);
-            player.Scores += brick.pointPerKill;
-            CheckWin();
-        }
-
-        private void CheckLose()
-        {
-            if(player.Balls.Count == 0)
-            {
-                player.Lifes--;
-                if(player.Lifes >= 1)
-                {
-                    Respawn();
-                }
-            }
-        }
-
-        private void LifesChangedListener(int lifes)
-        {
-            if(lifes <= 0)
-            {
-                Lose();
-            }
-        }
-
-        private void Respawn()
-        {
-            Ball newBall = player.Platform.SpawnBall(initPlayerData.startBallPrefab);
-            player.Balls.Add(newBall);
-            player.Init(initPlayerData);
-        }
-
-        private void Lose()
-        {
-            Pause();
-            Lost?.Invoke(player.Scores);
-            Debug.Log("Lose");
-        }
-
-        private void CheckWin()
-        {
-            if(bricks.Count == 0)
-            {
-                Win();
-            }
-        }
-
-        private void Win()
-        {
-            Pause();
-            Won?.Invoke(player.Scores);
-            Debug.Log("Win");
-        }
-
-        private void Pause()
+        private void ShowWinScreen()
         {
             Time.timeScale = 0f;
+            GameController gameController = resolver.Resolve<GameController>();
+            winScreen = resolver.Resolve<WinScreen>();
+            winScreen.Bind(gameController);
+            winScreen.Show(player.Scores);
         }
 
-        private void Continue()
+        private void ShowLoseScreen()
         {
-            Time.timeScale = 1f;
+            Time.timeScale = 0f;
+            GameController gameController = resolver.Resolve<GameController>();
+            loseScreen = resolver.Resolve<LoseScreen>();
+            loseScreen.Bind(gameController);
+            loseScreen.Show(player.Scores);
+        }
+
+        /*
+       private void Win()
+       {
+           Pause();
+           won?.Invoke(player.Scores);
+           Debug.Log("Win");
+       }*/
+
+        public void Pause()
+        {
+            if(levelController.IsStarted)
+            {
+                Time.timeScale = 0f;
+                paused?.Invoke();
+            }
+        }
+
+        public void Resume()
+        {
+            if(levelController.IsStarted)
+            {
+                Time.timeScale = 1f;
+                resumed?.Invoke();
+            }
         }
 
         public void ToMenu()
         {
-            SceneManager.LoadScene(MenuScene);
+            SceneManager.LoadScene(gameConfig.menuSceneName);
         }
 
         public void NextLevel()
         {
-            SceneManager.LoadScene(MenuScene);
+            SceneManager.LoadScene(gameConfig.menuSceneName);
         }
 
-        public Player Player
-        {
-            get => player;
-        }
+        public Player Player => player;
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace miniit.Arcanoid
+namespace miniIT.Arcanoid
 {
     public class Fall : MonoBehaviour
     {

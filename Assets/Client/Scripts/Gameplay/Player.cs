@@ -1,57 +1,26 @@
 using System;
-using System.Collections.Generic;
-using UnityEngine;
 
-namespace miniit.Arcanoid
+namespace miniIT.Arcanoid
 {
     [Serializable]
     public class Player
     {
         public event Action<int> ScoresChanged = default;
-        public event Action<float> SpeedChanged = default;
         public event Action<int> LifesChanged = default;
         public event Action Lost = default;
-        [SerializeField]
+
         private InitPlayerData initData = default;
 
-        [SerializeField]
-        private Platform platform = default;
-        [SerializeField]
-        private int scores = 0;
-        private List<Ball> balls = default;
-        [SerializeField]
         private int lifes = 3;
-        [SerializeField]
-        private float ballsSpeed = 4f;
+        private int scores = 0;
+        public int level = 0;
 
-        [SerializeField]
-        private float ballsSize = 1f;
-
-        public Player()
-        {
-            balls = new List<Ball>();
-        }
-
-        public void Init(InitPlayerData initData)
+        public Player(InitPlayerData initData)
         {
             this.initData = initData;
-            BallsSize = initData.startBallsSize;
-            BallsSpeed = initData.startBallsSpeed;
-            platform.Size = initData.startPlatformSize;
-        }
-
-        public float BallsSpeed
-        {
-            get => ballsSpeed;
-            set
-            {
-                ballsSpeed = Mathf.Clamp(value, initData.minBallsSpeed, initData.maxBallsSpeed);
-                for(int i = 0; i < balls.Count; i++)
-                {
-                    balls[i].Speed = ballsSpeed;
-                }
-                SpeedChanged?.Invoke(ballsSpeed);
-            }
+            lifes = initData.lifes;
+            scores = initData.startScores;
+            level = initData.startLevel;
         }
 
         public int Scores
@@ -77,37 +46,17 @@ namespace miniit.Arcanoid
                 lifes = value;
                 if(lifes <= 0)
                 {
-
+                    LifesChanged?.Invoke(lifes);
+                    Lost?.Invoke();
                 }
-
-                LifesChanged?.Invoke(lifes);
-                Lost?.Invoke();
-            }
-        }
-
-        public float BallsSize
-        {
-            get => ballsSize;
-            set
-            {
-                ballsSize = Mathf.Clamp(value, initData.minBallsSize, initData.maxBallsSize);
-                for(int i = 0; i < balls.Count; i++)
+                else
                 {
-                    balls[i].Scale = ballsSize;
+                    LifesChanged?.Invoke(lifes);
                 }
+
             }
         }
 
-        public Platform Platform
-        {
-            get => platform;
-            set
-            {
-                platform = value;
-            }
-        }
-
-        public IList<Ball> Balls => balls;
-
+        public InitPlayerData InitData => initData;
     }
 }

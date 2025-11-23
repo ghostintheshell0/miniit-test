@@ -1,8 +1,9 @@
 using System;
 using TriInspector;
 using UnityEngine;
+using VContainer;
 
-namespace miniit.Arcanoid
+namespace miniIT.Arcanoid
 {
     public class Brick : MonoBehaviour
     {
@@ -18,6 +19,15 @@ namespace miniit.Arcanoid
         protected bool isDead = false;
 
         public int pointPerKill = 1;
+        public bool canBeIgnored = false;
+
+        protected IObjectResolver resolver;
+
+        [Inject]
+        public virtual void Init(IObjectResolver resolver)
+        {
+            this.resolver = resolver;
+        }
 
         protected virtual void Die()
         {

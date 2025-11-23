@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
+using VContainer;
+using VContainer.Unity;
 
-namespace miniit.Arcanoid
+namespace miniIT.Arcanoid
 {
     public class Platform : MonoBehaviour
     {
-        public Player player;
 
         [SerializeField]
         private Rigidbody2D body = default;
@@ -27,8 +28,6 @@ namespace miniit.Arcanoid
         [SerializeField]
         private float stoppongDistance = 0.2f;
 
-        [SerializeField]
-        private float speedBonus = 0.1f;
 
         [Header("Size")]
         [SerializeField]
@@ -38,6 +37,13 @@ namespace miniit.Arcanoid
         [SerializeField]
         private float size = 1f;
 
+        private IObjectResolver resolver = default;
+
+        [Inject]
+        public void Inject(IObjectResolver resolver)
+        {
+            this.resolver = resolver;
+        }
 
         public void MoveTo(in Vector2 position)
         {
@@ -75,7 +81,7 @@ namespace miniit.Arcanoid
                 connectedBalls = new List<Ball>();
             }
             Vector3 position = ballsSpawnPoint.position - ballPrefab.Pivot.position;
-            Ball ball = Instantiate(ballPrefab, position, ballPrefab.transform.rotation, ballsSpawnPoint);
+            Ball ball = resolver.Instantiate(ballPrefab, position, ballPrefab.transform.rotation, ballsSpawnPoint);
             ball.Simulated = false;
             connectedBalls.Add(ball);
 
@@ -85,7 +91,7 @@ namespace miniit.Arcanoid
 
         private Vector2 GetRandomDirection()
         {
-            var angle = UnityEngine.Random.Range(-launchAngle, launchAngle) * 0.5f;
+            float angle = UnityEngine.Random.Range(-launchAngle, launchAngle) * 0.5f;
             Quaternion rot = Quaternion.AngleAxis(angle, Vector3.forward);
             Vector3 direction = rot * launchDirection;
             return direction;
@@ -95,7 +101,7 @@ namespace miniit.Arcanoid
         {
             if(collision.collider.TryGetComponent(out Ball ball))
             {
-                var direction = (ball.transform.position-transform.position).normalized;
+                Vector3 direction = (ball.transform.position-transform.position).normalized;
                 ball.Direction = direction;
 
             }

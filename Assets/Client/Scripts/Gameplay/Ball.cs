@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace miniit.Arcanoid
+namespace miniIT.Arcanoid
 {
     public class Ball : MonoBehaviour
     {

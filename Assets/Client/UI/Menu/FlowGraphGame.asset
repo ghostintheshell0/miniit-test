@@ -1,5 +1,42 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6100397170260346869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 751458f148144184aa69e35c01aecec0, type: 3}
+  m_Name: Start
+  m_EditorClassIdentifier: 
+  FlowGraphId: da2e7b85-0b5b-447d-ac79-9ebf6a1d1063
+  NodeId: ad3476d3-a0f4-48c6-97dd-791cbd8fc648
+  NodeType: 2
+  NodeName: Start
+  NodeDescription: 
+  InputPorts: []
+  OutputPorts:
+  - NodeId: ad3476d3-a0f4-48c6-97dd-791cbd8fc648
+    PortId: 38629f4a-7386-43a7-b9c7-2470bf0c509b
+    Direction: 1
+    Capacity: 0
+    Connections: []
+    Value: 
+    ValueTypeQualifiedName: 
+    CanBeDeleted: 0
+    CanBeReordered: 0
+  RunUpdate: 0
+  RunFixedUpdate: 0
+  RunLateUpdate: 0
+  NodeState: 0
+  CanBeDeleted: 0
+  Passthrough: 1
+  ClearGraphHistory: 1
+  Position: {x: 0, y: 0}
+  SystemNodeType: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16,6 +53,7 @@ MonoBehaviour:
   GraphName: Flow Graph
   GraphDescription: 
   IsSubGraph: 0
-  Nodes: []
-  RootNode: {fileID: 0}
+  Nodes:
+  - {fileID: -6100397170260346869}
+  RootNode: {fileID: -6100397170260346869}
   ActiveNode: {fileID: 0}

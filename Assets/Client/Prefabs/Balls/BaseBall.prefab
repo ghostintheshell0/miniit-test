@@ -120,6 +120,9 @@ MonoBehaviour:
   maxScale: 2.5
   scale: 1
   speed: 0
+  minYSpeed: 0.5
+  antiStuckModeDelay: 10
+  lastBrickHitTime: -3.4028235e+38
 --- !u!1 &2296926072947031750
 GameObject:
   m_ObjectHideFlags: 0

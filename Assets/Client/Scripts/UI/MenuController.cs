@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace miniit.Arcanoid
+namespace miniIT.Arcanoid
 {
     public class MenuController : MonoBehaviour
     {
