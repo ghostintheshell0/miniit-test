@@ -23,5 +23,11 @@ namespace miniIT.Arcanoid
         public float maxPlatformSize = 3f;
         [Slider(nameof(minPlatformSize), nameof(maxPlatformSize))]
         public float startPlatformSize = 1f;
+
+        [Header("audio")]
+
+        public SoundSet winSound = default;
+        public SoundSet loseSound = default;
+        public SoundSet playlist = default;
     }
 }

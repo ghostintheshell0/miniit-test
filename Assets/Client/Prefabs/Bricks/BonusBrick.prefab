@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1568386734587849873, guid: 3fb7a20e7045aa8f5831506e73ca8d09, type: 3}
       propertyPath: m_Name
-      value: BonusBrick Variant
+      value: BonusBrick
       objectReference: {fileID: 0}
     - target: {fileID: 5745845445046759315, guid: 3fb7a20e7045aa8f5831506e73ca8d09, type: 3}
       propertyPath: m_LocalPosition.x
@@ -90,7 +90,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fb28f243afaf9588838a4efa6f95962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyVFXPrefab: {fileID: 6726750517929272938, guid: 320ccb3bc7da1be7b9ba87d57be2827f, type: 3}
+  destroySounds: {fileID: 11400000, guid: 32008531e1c65f9098c4478abc9d61b0, type: 2}
   heals: 1
   maxHeals: 1
   isDead: 0
+  pointPerKill: 1
+  canBeIgnored: 0
   bonusesList: {fileID: 11400000, guid: 67d2ad44599069f72ba20aa1fd0da94a, type: 2}

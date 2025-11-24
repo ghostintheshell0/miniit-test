@@ -209,4 +209,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d7141cc5f0d9ec758c094d7669db32d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickSound: {fileID: 11400000, guid: 4630b7d53e6e18ddfad54b17f5fc435a, type: 2}
   Bonus: 0.25

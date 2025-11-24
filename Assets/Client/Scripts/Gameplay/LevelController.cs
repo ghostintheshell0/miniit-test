@@ -37,6 +37,8 @@ namespace miniIT.Arcanoid
         private PlayerInput playerInput = default;
         private Player player = default;
         private VFXSpawner vfxSpawner = default;
+        private AudioSystem audioSystem = default;
+        private MusicPlayer musicPlayer = default;
 
         private bool isStarted = false;
 
@@ -52,6 +54,9 @@ namespace miniIT.Arcanoid
             levelData = resolver.Resolve<LevelData>();
             playerInput = resolver.Resolve<PlayerInput>();
             vfxSpawner = resolver.Resolve<VFXSpawner>();
+            musicPlayer = resolver.Resolve<MusicPlayer>();
+            audioSystem = resolver.Resolve<AudioSystem>();
+            musicPlayer.Play(levelData.LevelValues.playlist);
 
             player = gameController.Player;
             AddInputListeners(playerInput);
@@ -181,6 +186,7 @@ namespace miniIT.Arcanoid
                 }
                 else
                 {
+                    audioSystem.Play(levelData.LevelValues.loseSound);
                     isStarted = false;
                     Failed?.Invoke();
                 }
@@ -206,6 +212,7 @@ namespace miniIT.Arcanoid
             if(destructableBricks.Count == 0)
             {
                 isStarted = false;
+                audioSystem.Play(levelData.LevelValues.winSound);
                 Completed?.Invoke();
             }
         }

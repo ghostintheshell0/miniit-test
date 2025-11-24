@@ -5,7 +5,10 @@ namespace miniIT.Arcanoid
 {
     public abstract class BaseBonus : MonoBehaviour
     {
+        [SerializeField]
+        protected SoundSet pickSound = default;
         protected IObjectResolver resolver = default;
+        
 
         [Inject]
         public virtual void Inject(IObjectResolver resolver)
@@ -18,6 +21,7 @@ namespace miniIT.Arcanoid
             if(collision.TryGetComponent(out Platform platform))
             {
                 Apply(platform);
+                resolver.Resolve<AudioSystem>().Play(pickSound);
                 Destroy(gameObject);
             }
         }

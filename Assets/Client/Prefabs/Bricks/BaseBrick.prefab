@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyVFXPrefab: {fileID: 6726750517929272938, guid: 320ccb3bc7da1be7b9ba87d57be2827f, type: 3}
+  destroySounds: {fileID: 11400000, guid: 32008531e1c65f9098c4478abc9d61b0, type: 2}
   heals: 1
   maxHeals: 1
   isDead: 0

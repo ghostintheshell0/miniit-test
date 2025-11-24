@@ -21,3 +21,6 @@ MonoBehaviour:
   minPlatformSize: 0.5
   maxPlatformSize: 3
   startPlatformSize: 1
+  winSound: {fileID: 11400000, guid: 65d6a8a246e8c2bd3a9ed6b508b49b92, type: 2}
+  loseSound: {fileID: 11400000, guid: aa99cf1e52089ec74866721dd94278aa, type: 2}
+  playlist: {fileID: 11400000, guid: 9ebedffa942ffb0fbae375be71a1493c, type: 2}

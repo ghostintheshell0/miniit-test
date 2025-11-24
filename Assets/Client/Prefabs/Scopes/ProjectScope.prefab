@@ -54,4 +54,6 @@ MonoBehaviour:
   winScreenPrefab: {fileID: 6194010072653990753, guid: 568fbebb0db266722a1691417376c8fb, type: 3}
   loseScreenPrefab: {fileID: 7939120829333928244, guid: 5bc276d306b0378a5b76d939bc3a0618, type: 3}
   hudPrefab: {fileID: 7722040961331242413, guid: 1f1628fe2e1b7b83c8e0329958acb091, type: 3}
-  vfxSpawner: {fileID: 7698715748814119180, guid: 3039757ca1e095231935e35bcd502ff1, type: 3}
+  vfxSpawnerPrefab: {fileID: 7698715748814119180, guid: 3039757ca1e095231935e35bcd502ff1, type: 3}
+  audioSystemPrefab: {fileID: 3920511607780826794, guid: ae49be7248aaf9ddbb3326cc6b5cc6da, type: 3}
+  musicPlayerPrefab: {fileID: 7819948515619306007, guid: e24f70821fee8091abab7fc46bdcc68f, type: 3}

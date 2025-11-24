@@ -12,6 +12,8 @@ namespace miniIT.Arcanoid
 
         [SerializeField]
         private VFXInstance destroyVFXPrefab = default;
+        [SerializeField]
+        private SoundSet destroySounds = default;
 
         [SerializeField]
         protected int heals = 1;
@@ -44,6 +46,8 @@ namespace miniIT.Arcanoid
             isDead = true;
             Dead?.Invoke(this);
 
+            resolver.Resolve<AudioSystem>().Play(destroySounds);
+
             Destroy(gameObject);
         }
 
@@ -62,4 +66,5 @@ namespace miniIT.Arcanoid
 
         public VFXInstance DestroyVFXPrefab => destroyVFXPrefab;
     }
+
 }

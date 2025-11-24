@@ -18,7 +18,7 @@ namespace miniIT.Arcanoid
         public void AddListeners(LevelController controller)
         {
             levelController = controller;
-            controller.Started += Start;
+            controller.Started += Run;
             controller.Failed += Stop;
         }
 
@@ -35,7 +35,7 @@ namespace miniIT.Arcanoid
             process = default;
         }
 
-        public void Start()
+        public void Run()
         {
             if(process != default)
             {

@@ -242,7 +242,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7843096527933081672, guid: c22bcabce9cfa3035875443ee1081a60, type: 3}
       propertyPath: m_Name
-      value: ExtraLife Variant
+      value: ExtraLife
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -280,4 +280,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46cd357ca89c97728b41fbca9b4945ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickSound: {fileID: 11400000, guid: 4630b7d53e6e18ddfad54b17f5fc435a, type: 2}
   Bonus: 1
