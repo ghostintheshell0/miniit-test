@@ -2,12 +2,16 @@ using System;
 using TriInspector;
 using UnityEngine;
 using VContainer;
+using VContainer.Unity;
 
 namespace miniIT.Arcanoid
 {
     public class Brick : MonoBehaviour
     {
         public event Action<Brick> Dead = default;
+
+        [SerializeField]
+        private VFXInstance destroyVFXPrefab = default;
 
         [SerializeField]
         protected int heals = 1;
@@ -20,6 +24,7 @@ namespace miniIT.Arcanoid
 
         public int pointPerKill = 1;
         public bool canBeIgnored = false;
+
 
         protected IObjectResolver resolver;
 
@@ -54,5 +59,7 @@ namespace miniIT.Arcanoid
                 }
             }
         }
+
+        public VFXInstance DestroyVFXPrefab => destroyVFXPrefab;
     }
 }

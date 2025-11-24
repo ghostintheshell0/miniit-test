@@ -20,6 +20,8 @@ namespace miniIT.Arcanoid
         private LoseScreen loseScreenPrefab = default;
         [SerializeField]
         private HUD hudPrefab = default;
+        [SerializeField]
+        private VFXSpawner vfxSpawner = default;
 
         protected override void Configure(IContainerBuilder builder)
         {
@@ -28,6 +30,7 @@ namespace miniIT.Arcanoid
             builder.RegisterComponentInNewPrefab(hudPrefab, Lifetime.Singleton).DontDestroyOnLoad();
             builder.RegisterComponentInNewPrefab(winScreenPrefab, Lifetime.Singleton).DontDestroyOnLoad();
             builder.RegisterComponentInNewPrefab(loseScreenPrefab, Lifetime.Singleton).DontDestroyOnLoad();
+            builder.RegisterComponentInNewPrefab(vfxSpawner, Lifetime.Singleton).DontDestroyOnLoad();
             builder.RegisterInstance(gameConfig);
             builder.RegisterInstance(initPlayerData);
             builder.Register<GameController>(Lifetime.Singleton);

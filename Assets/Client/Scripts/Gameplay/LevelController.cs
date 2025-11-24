@@ -7,7 +7,7 @@ using VContainer.Unity;
 
 namespace miniIT.Arcanoid
 {
-    public class LevelController
+    public class LevelController : IDisposable
     {
         public event Action Started = default;
         public event Action Completed = default;
@@ -28,7 +28,7 @@ namespace miniIT.Arcanoid
         
         private Platform playerPlatform = default;
 
-        private List<Brick> bricks = default;
+        private List<Brick> destructableBricks = default;
         private List<Ball> balls = default;
         private List<BaseBonus> bonuses = default;
 
@@ -36,6 +36,7 @@ namespace miniIT.Arcanoid
         private GameController gameController = default;
         private PlayerInput playerInput = default;
         private Player player = default;
+        private VFXSpawner vfxSpawner = default;
 
         private bool isStarted = false;
 
@@ -49,10 +50,12 @@ namespace miniIT.Arcanoid
         {
             gameController = resolver.Resolve<GameController>();
             levelData = resolver.Resolve<LevelData>();
+            playerInput = resolver.Resolve<PlayerInput>();
+            vfxSpawner = resolver.Resolve<VFXSpawner>();
 
             player = gameController.Player;
-            PlayerInput playerInput = resolver.Resolve<PlayerInput>();
             AddInputListeners(playerInput);
+
             balls = new List<Ball>();
             bonuses = new List<BaseBonus>();
 
@@ -67,13 +70,13 @@ namespace miniIT.Arcanoid
 
         private void InitBricks()
         {
-            bricks = new List<Brick>();
+            destructableBricks = new List<Brick>();
 
             foreach(Brick brick in levelData.bricks)
             {
                 if(!brick.canBeIgnored)
                 {
-                    bricks.Add(brick);
+                    destructableBricks.Add(brick);
                     brick.Dead += BrickDestroyListener;
                     brick.Init(resolver);
                 }
@@ -85,6 +88,12 @@ namespace miniIT.Arcanoid
             this.playerInput = playerInput;
             playerInput.OnFire += Fire;
             playerInput.OnPointerPosition += MovePlayer;
+        }
+
+        private void RemoveInputListeners()
+        {
+            playerInput.OnFire -= Fire;
+            playerInput.OnPointerPosition -= MovePlayer;
         }
 
         private void KillZoneEnterListener(Collider2D collider)
@@ -100,7 +109,12 @@ namespace miniIT.Arcanoid
         private void BrickDestroyListener(Brick brick)
         {
             brick.Dead -= BrickDestroyListener;
-            bricks.Remove(brick);
+            destructableBricks.Remove(brick);
+            if(brick.DestroyVFXPrefab != default)
+            {
+                vfxSpawner.Spawn(brick.DestroyVFXPrefab, brick.transform.position);
+            }
+            
             BrickDestroyed?.Invoke(brick);
             CheckWin();
         }
@@ -186,18 +200,20 @@ namespace miniIT.Arcanoid
             }
         }
 
-        public Platform PlayerPlatform
-        {
-            get => playerPlatform;
-        }
 
         private void CheckWin()
         {
-            if(bricks.Count == 0)
+            if(destructableBricks.Count == 0)
             {
                 isStarted = false;
                 Completed?.Invoke();
             }
+        }
+
+        public void Dispose()
+        {
+            RemoveInputListeners();
+            Debug.Log("Bye");
         }
 
         public float BallsSpeed
@@ -214,6 +230,7 @@ namespace miniIT.Arcanoid
             }
         }
 
+        public Platform PlayerPlatform => playerPlatform;
         public Player Player => player;
         public IList<Ball> Balls => balls;
         public bool IsStarted => isStarted;
