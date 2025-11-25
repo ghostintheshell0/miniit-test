@@ -132,10 +132,15 @@ namespace miniIT.Arcanoid
         {
             if(body.simulated)
             {
+                if(body.velocity.sqrMagnitude < 0.1f)
+                {
+                    Direction = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+
+                }
                 float currentAngle = CurrentAngle;
                 if(lastBrickHitTime + antiStuckModeDelay < Time.fixedTime && Mathf.Abs(currentAngle) < stuckAngle)
                 {
-                    float newAngle = Mathf.Sign(currentAngle) * antiStuckAngle;
+                    float newAngle = -Mathf.Sign(currentAngle) * antiStuckAngle;
                     CurrentAngle = newAngle;
                 }
             }

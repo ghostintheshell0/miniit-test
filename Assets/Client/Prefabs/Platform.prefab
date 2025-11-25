@@ -245,7 +245,8 @@ MonoBehaviour:
   launchAngle: 60
   connectedBalls: []
   maxSpeed: 10
-  stoppongDistance: 0.2
+  stoppingDistance: 0.2
   minSize: 0.5
   maxSize: 5
   size: 1
+  platformSize: 2

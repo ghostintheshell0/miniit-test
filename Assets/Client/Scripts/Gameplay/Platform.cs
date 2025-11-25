@@ -26,7 +26,7 @@ namespace miniIT.Arcanoid
         [SerializeField]
         private float maxSpeed = 5f;
         [SerializeField]
-        private float stoppongDistance = 0.2f;
+        private float stoppingDistance = 0.2f;
 
 
         [Header("Size")]
@@ -36,27 +36,41 @@ namespace miniIT.Arcanoid
         private float maxSize = 5f;
         [SerializeField]
         private float size = 1f;
+        [SerializeField]
+        private float platformSize = 1f;
 
         private IObjectResolver resolver = default;
+        private LevelController levelController = default;
 
         [Inject]
         public void Inject(IObjectResolver resolver)
         {
             this.resolver = resolver;
+            levelController = resolver.Resolve<LevelController>();
         }
-
-        public void MoveTo(in Vector2 position)
+        public void MoveTo(Vector2 position)
         {
-            float x = position.x;
-            float distance = x - transform.position.x;
-            if(Mathf.Abs(distance) < stoppongDistance)
+            Vector2 distance = position - body.position;
+            distance.y = 0;
+
+            if(distance.sqrMagnitude > stoppingDistance * stoppingDistance)
             {
-                body.velocity = Vector2.zero;
+                Vector2 dir = distance.normalized;
+                Vector2 offset = new Vector2((platformSize * size * 0.5f + 0.02f) * dir.x, 0f);
+                RaycastHit2D hit = Physics2D.Raycast(body.position+offset, dir, 0.02f);
+                if (hit.collider == null)
+                {
+                    Vector2 step = dir * maxSpeed * Time.fixedDeltaTime;
+                    body.MovePosition(body.position + step);
+                }
+                else
+                {
+                    body.velocity = Vector2.zero;
+                }
             }
             else
             {
-                float direction = distance < 0f ? -1f : 1f;
-                body.velocity = new Vector2(direction * maxSpeed, 0f);
+                body.velocity = Vector2.zero;
             }
         }
 
@@ -161,6 +175,15 @@ namespace miniIT.Arcanoid
             Gizmos.color = Color.red;
             Gizmos.DrawLine(origin, origin + leftDir * length);
             Gizmos.DrawLine(origin, origin + rightDir * length);
+
+            float offset = platformSize * size * 0.5f + 0.02f;
+            Vector3 hit1 = transform.position;
+            hit1.x += offset;
+            Vector3 hit2 = transform.position;
+            hit2.x -= offset;
+
+            Gizmos.DrawWireSphere(hit1, 0.1f);
+            Gizmos.DrawWireSphere(hit2, 0.1f);
         }
     }
 }

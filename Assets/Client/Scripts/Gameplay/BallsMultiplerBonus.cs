@@ -32,7 +32,7 @@ namespace miniIT.Arcanoid
                 for(int k = 1; k < count; k++)
                 {
                     Ball newBall = resolver.Instantiate(prefab, prefab.transform.position, prefab.transform.rotation);
-                    float angleRad = startAngle + angleDelta * k;
+                    float angleRad = Random.Range(-180f, 180f) * Mathf.Deg2Rad;
                     Vector3 newDirection = new Vector2(Mathf.Cos(angleRad), Mathf.Sin(angleRad));
                     levelController.Balls.Add(newBall);
                     newBall.Speed = levelController.BallsSpeed;

@@ -8,8 +8,8 @@ namespace miniIT.Arcanoid
 {
     public class VFXSpawner : MonoBehaviour
     {
-        private Dictionary<VFXInstance, Queue<VFXInstance>> pools;
-        private List<(VFXInstance instance, VFXInstance prefab)> activeEffects;
+        private Dictionary<VFXInstance, List<VFXInstance>> pools = default;
+        private List<(VFXInstance instance, VFXInstance prefab)> activeEffects = default;
         private IObjectResolver resolver = default;
         private Coroutine checkLifetimeProcess = default;
 
@@ -17,13 +17,14 @@ namespace miniIT.Arcanoid
         public void Inject(IObjectResolver resolver)
         {
             this.resolver = resolver;
-            pools = new Dictionary<VFXInstance, Queue<VFXInstance>>();
+            pools = new Dictionary<VFXInstance, List<VFXInstance>>();
             activeEffects = new List<(VFXInstance instance, VFXInstance prefab)>();
         }
 
-        public VFXInstance Spawn(VFXInstance prefab, Vector3 position)
+        public VFXInstance Spawn(VFXInstance prefab, Vector3 position, Transform parent = default)
         {
-            VFXInstance instance = GetFromPool(prefab, position);
+            VFXInstance instance = GetFromPool(prefab, position, parent);
+            instance.transform.SetParent(default);
             instance.Play();
 
             activeEffects.Add((instance, prefab));
@@ -34,20 +35,22 @@ namespace miniIT.Arcanoid
             return instance;
         }
 
-        private VFXInstance GetFromPool(VFXInstance prefab, Vector3 position)
+        private VFXInstance GetFromPool(VFXInstance prefab, Vector3 position, Transform parent = default)
         {
             if (!pools.ContainsKey(prefab))
-                pools[prefab] = new Queue<VFXInstance>();
+            {
+                pools[prefab] = new List<VFXInstance>();
+            }
 
             VFXInstance instance;
             if (pools[prefab].Count > 0)
             {
-                instance = pools[prefab].Dequeue();
+                instance = pools[prefab].ExtractLast();
                 instance.gameObject.SetActive(true);
             }
             else
             {
-                instance = resolver.Instantiate(prefab);
+                instance = resolver.Instantiate(prefab, parent);
             }
 
             instance.transform.position = position;
@@ -77,8 +80,9 @@ namespace miniIT.Arcanoid
 
         private void ReturnToPool(VFXInstance instance, VFXInstance prefab)
         {
+            instance.transform.SetParent(transform);
             instance.gameObject.SetActive(false);
-            pools[prefab].Enqueue(instance);
+            pools[prefab].Add(instance);
             activeEffects.Remove((instance, prefab));
         }
 
@@ -89,7 +93,7 @@ namespace miniIT.Arcanoid
                 if (instance != null)
                 {
                     instance.gameObject.SetActive(false);
-                    pools[prefab].Enqueue(instance);
+                    pools[prefab].Add(instance);
                 }
             }
             activeEffects.Clear();

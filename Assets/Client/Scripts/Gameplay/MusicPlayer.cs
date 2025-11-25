@@ -93,7 +93,7 @@ namespace miniIT.Arcanoid
             float t = 0f;
             while (t < duration)
             {
-                t += Time.deltaTime;
+                t += Time.fixedDeltaTime;
                 src.volume = Mathf.Lerp(from, to, t / duration);
                 yield return default;
             }
@@ -105,7 +105,7 @@ namespace miniIT.Arcanoid
             float t = 0f;
             while (t < duration)
             {
-                t += Time.deltaTime;
+                t += Time.fixedDeltaTime;
                 float progress = t / duration;
                 from.volume = Mathf.Lerp(1f, 0f, progress);
                 to.volume = Mathf.Lerp(0f, 1f, progress);
@@ -121,7 +121,7 @@ namespace miniIT.Arcanoid
             float t = 0f;
             while (t < duration)
             {
-                t += Time.deltaTime;
+                t += Time.fixedDeltaTime;
                 if(src == default)
                 {
                     audioSystem.Stop(shot);

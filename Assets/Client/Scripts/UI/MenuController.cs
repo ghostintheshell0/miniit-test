@@ -11,15 +11,20 @@ namespace miniIT.Arcanoid
 
         [SerializeField]
         private SoundSet playlist = default;
+        [SerializeField]
+        private IObjectResolver resolver = default;
 
         [Inject]
         public void Inject(IObjectResolver resolver)
         {
+            Debug.Log("Hello?");
+            this.resolver = resolver;
             resolver.Resolve<MusicPlayer>().Play(playlist);
         }
 
         public void Play()
         {
+            resolver.Resolve<PlayerService>().ResetPlayer();
             Addressables.LoadSceneAsync(startScene);
         }
 

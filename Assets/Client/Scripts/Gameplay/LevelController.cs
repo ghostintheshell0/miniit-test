@@ -117,11 +117,8 @@ namespace miniIT.Arcanoid
         private void BrickDestroyListener(Brick brick)
         {
             brick.Dead -= BrickDestroyListener;
+            player.Scores += brick.pointPerKill;
             destructableBricks.Remove(brick);
-            if(brick.DestroyVFXPrefab != default)
-            {
-                vfxSpawner.Spawn(brick.DestroyVFXPrefab, brick.transform.position);
-            }
             
             BrickDestroyed?.Invoke(brick);
             CheckWin();
@@ -223,6 +220,7 @@ namespace miniIT.Arcanoid
         public void Dispose()
         {
             RemoveInputListeners();
+            vfxSpawner.ReturnAll();
             Debug.Log("Bye");
         }
 

@@ -113,15 +113,16 @@ MonoBehaviour:
   body: {fileID: 598989846213645836}
   collider: {fileID: 2508378845272003812}
   pivot: {fileID: 8531955672624122846}
-  DebugField: {fileID: 0}
+  platformHitSound: {fileID: 0}
   startSpeed: 0
   Damage: 1
   minScale: 0.5
   maxScale: 2.5
   scale: 1
   speed: 0
-  minYSpeed: 0.5
+  stuckAngle: 6
   antiStuckModeDelay: 10
+  antiStuckAngle: 10
   lastBrickHitTime: -3.4028235e+38
 --- !u!1 &2296926072947031750
 GameObject:

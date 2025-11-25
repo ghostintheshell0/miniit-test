@@ -34,7 +34,9 @@ namespace miniIT.Arcanoid
 
         public void ResetPlayer()
         {
-
+            player.Lifes = initPlayerData.lifes;
+            player.Scores = initPlayerData.startScores;
+            player.level = initPlayerData.startLevel;
         }
     }
 }

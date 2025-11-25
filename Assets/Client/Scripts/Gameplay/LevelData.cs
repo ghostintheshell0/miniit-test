@@ -29,6 +29,9 @@ namespace miniIT.Arcanoid
         [SerializeField]
         private CameraFitter cameraFitter = default;
 
+        [SerializeField]
+        private Transform vfxLayer = default;
+
         [Button]
         public void CollectBricks()
         {
@@ -73,5 +76,6 @@ namespace miniIT.Arcanoid
         public Camera MainCamera => mainCamera;
         public LevelValues LevelValues => levelValues;
         public CameraFitter CameraFitter => cameraFitter;
+        public Transform VFXLayer => vfxLayer;
     }
 }

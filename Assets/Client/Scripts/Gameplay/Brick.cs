@@ -48,6 +48,10 @@ namespace miniIT.Arcanoid
             Dead?.Invoke(this);
 
             resolver.Resolve<AudioSystem>().Play(destroySounds);
+            if(DestroyVFXPrefab != default)
+            {
+                resolver.Resolve<VFXSpawner>().Spawn(DestroyVFXPrefab, transform.position, transform);
+            }
 
             Destroy(gameObject);
         }

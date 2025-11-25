@@ -663,7 +663,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 341593643}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: a845eef5abc4ec8ebb760be1d943f80d, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1614,7 +1614,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 15, y: 2}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!4 &1072360893
 Transform:
@@ -1625,8 +1625,8 @@ Transform:
   m_GameObject: {fileID: 1072360891}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -6, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -7.35, z: 0}
+  m_LocalScale: {x: 30, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2030343313}
@@ -1701,7 +1701,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1189673035}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: a845eef5abc4ec8ebb760be1d943f80d, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -2253,7 +2253,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1750626015}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: a845eef5abc4ec8ebb760be1d943f80d, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -2538,6 +2538,7 @@ MonoBehaviour:
   mainCamera: {fileID: 6030180332051887598}
   levelValues: {fileID: 11400000, guid: 4e30e95010732035eb82e49d3cf82d33, type: 2}
   cameraFitter: {fileID: 2030343315}
+  vfxLayer: {fileID: 2030343313}
 --- !u!4 &2030343313
 Transform:
   m_ObjectHideFlags: 0
@@ -2606,12 +2607,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff3436cc1c34c08a69d9366adfbbd80a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paddingLeftWorld: 0
-  paddingRightWorld: 0
-  paddingTopWorld: 0
-  paddingBottomWorld: 0
+  paddingLeftWorld: 0.2
+  paddingRightWorld: 0.2
+  paddingTopWorld: 0.2
+  paddingBottomWorld: 0.2
   paddingLeftScreen: 0
-  paddingRightScreen: 0.55
+  paddingRightScreen: 0.41
   paddingTopScreen: 0
   paddingBottomScreen: 0
 --- !u!1 &2035398596

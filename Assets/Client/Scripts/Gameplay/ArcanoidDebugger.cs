@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 namespace miniIT.Arcanoid
@@ -23,9 +24,12 @@ namespace miniIT.Arcanoid
         {
             if(clickPerformed)
             {
-                Vector3 worldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
-                OnClick(worldPos);
                 clickPerformed = false;
+                if(!EventSystem.current.IsPointerOverGameObject())
+                {
+                    Vector3 worldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
+                    OnClick(worldPos);
+                }
             }
         }
 
