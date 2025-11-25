@@ -13,7 +13,7 @@ namespace miniIT.Arcanoid
         {
             startTime = Time.time;
 
-            foreach (var ps in particleSystems)
+            foreach(ParticleSystem ps in particleSystems)
             {
                 ps.Play(true);
             }

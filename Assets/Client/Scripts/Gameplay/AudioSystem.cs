@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.InputSystem;
 using VContainer;
 using VContainer.Unity;
 
@@ -46,36 +47,37 @@ namespace miniIT.Arcanoid
 
         public AudioShot Play(SoundSet set, AudioChannelSettings settings)
         {
-            if (set == null || set.clips.Length == 0)
+            if(set == null || set.clips.Length == 0)
             {
                 return default;
             }
+
             AudioClip clip = set.clips[Random.Range(0, set.clips.Length)];
             return Play(clip, settings);
         }
 
         public AudioShot Play(AudioClip clip, AudioChannelSettings settings)
         {
-            if (clip == null || settings == null)
+            if(clip == null || settings == null)
             {
                 return default;
             }
 
-            if (!channelSources.ContainsKey(settings.channelName))
+            if(!channelSources.ContainsKey(settings.channelName))
             {
                 channelSources[settings.channelName] = new List<AudioSource>();
             }
 
             List<AudioSource> sources = channelSources[settings.channelName];
 
-            if (sources.Count >= settings.maxSounds)
+            if(sources.Count >= settings.maxSounds)
             {
-                switch (settings.OverrideSoundsBehaviour)
+                switch(settings.OverrideSoundsBehaviour)
                 {
                     case OverrideSoundsBehaviour.IgnoreNew:
                         return default;
                     case OverrideSoundsBehaviour.StopOld:
-                        var oldest = sources[0];
+                        AudioSource oldest = sources[0];
                         StopSource(oldest);
                         sources.RemoveAt(0);
                         break;
@@ -98,22 +100,21 @@ namespace miniIT.Arcanoid
 
         public void Stop(in AudioShot shot)
         {
-            if (activeShots.TryGetValue(shot.id, out var src))
+            if(activeShots.TryGetValue(shot.id, out AudioSource src))
             {
                 StopSource(src);
                 activeShots.Remove(shot.id);
 
-                // удалить из списка канала
-                foreach (var kvp in channelSources)
+                foreach((string key, List<AudioSource> source) in channelSources)
                 {
-                    kvp.Value.Remove(src);
+                    source.Remove(src);
                 }
             }
         }
 
         public void SetVolume(in AudioShot shot, float volume = 1f)
         {
-            if (activeShots.TryGetValue(shot.id, out var src))
+            if(activeShots.TryGetValue(shot.id, out AudioSource src))
             {
                 src.volume = volume;
             }
@@ -121,7 +122,7 @@ namespace miniIT.Arcanoid
 
         public void StopAll()
         {
-            foreach (var src in activeShots.Values)
+            foreach(AudioSource src in activeShots.Values)
             {
                 StopSource(src);
             }
@@ -131,16 +132,23 @@ namespace miniIT.Arcanoid
 
         public void Stop(AudioChannelSettings channel)
         {
-            if (channel == null) return;
-            if (!channelSources.ContainsKey(channel.channelName)) return;
+            if(channel == null)
+            {
+                return;
+            }
 
-            foreach (var src in channelSources[channel.channelName])
+            if(!channelSources.ContainsKey(channel.channelName))
+            {
+                return;
+            }
+
+            foreach(AudioSource src in channelSources[channel.channelName])
             {
                 StopSource(src);
-                // удалить из activeShots
-                foreach (var kvp in activeShots)
+                
+                foreach(KeyValuePair<int, AudioSource> kvp in activeShots)
                 {
-                    if (kvp.Value == src)
+                    if(kvp.Value == src)
                     {
                         activeShots.Remove(kvp.Key);
                         break;
@@ -152,14 +160,18 @@ namespace miniIT.Arcanoid
 
         private void StopSource(AudioSource src)
         {
-            if (src == null) return;
+            if(src == null)
+            {
+                return;
+            }
+
             src.Stop();
             Destroy(src.gameObject);
         }
         
         public AudioSource GetSource(in AudioShot shot)
         {
-            if (activeShots.TryGetValue(shot.id, out var src))
+            if(activeShots.TryGetValue(shot.id, out AudioSource src))
             {
                 return src;
             }
@@ -181,7 +193,6 @@ namespace miniIT.Arcanoid
             get => GetChannelVolume(musicGroup, musicGroupName);
             set
             {
-                Debug.Log(value);
                 SetChannelVolume(musicGroup, musicGroupName, value);
             }
         }
@@ -196,7 +207,7 @@ namespace miniIT.Arcanoid
         private float GetChannelVolume(AudioMixerGroup group, string name)
         {
             float dB;
-            if (group.audioMixer.GetFloat(name, out dB))
+            if(group.audioMixer.GetFloat(name, out dB))
             {
                 return Mathf.Pow(10f, dB / 20f);
             }

@@ -24,8 +24,6 @@ namespace miniIT.Arcanoid
 
         private void OnBuild(IObjectResolver resolver)
         {
-            Debug.Log("scene scope Builded");
-
             GameController gameController = resolver.Resolve<GameController>();
             LevelController levelController = resolver.Resolve<LevelController>();
             HUD hud = resolver.Resolve<HUD>();

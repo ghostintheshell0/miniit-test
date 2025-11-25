@@ -1,9 +1,7 @@
 using System;
 using TriInspector;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using VContainer;
-using VContainer.Unity;
 
 namespace miniIT.Arcanoid
 {

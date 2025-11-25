@@ -1,3 +1,5 @@
+using UnityEngine;
+using UnityEngine.AddressableAssets;
 using VContainer;
 
 namespace miniIT.Arcanoid
@@ -6,6 +8,9 @@ namespace miniIT.Arcanoid
     {
         [Inject]
         private InitPlayerData initPlayerData = default;
+
+        [Inject]
+        private GameConfig gameConfig = default;
 
         private Player player = default;
 
@@ -41,6 +46,13 @@ namespace miniIT.Arcanoid
             player.Lifes = initPlayerData.lifes;
             player.Scores = initPlayerData.startScores;
             player.level = initPlayerData.startLevel;
+        }
+
+        public AssetReference GetLevel()
+        {
+            int id = Mathf.Min(GetPlayer().level, gameConfig.levels.Count);
+            AssetReference levelRef = gameConfig.levels[id];
+            return levelRef;
         }
     }
 }

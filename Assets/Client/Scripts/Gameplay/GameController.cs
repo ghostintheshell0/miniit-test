@@ -7,8 +7,8 @@ namespace miniIT.Arcanoid
 {
     public class GameController
     {
-        public event Action paused = default;
-        public event Action resumed = default;
+        public event Action Paused = default;
+        public event Action Resumed = default;
 
 
         private GameConfig gameConfig = default;
@@ -62,7 +62,7 @@ namespace miniIT.Arcanoid
             if(levelController.IsStarted)
             {
                 Time.timeScale = 0f;
-                paused?.Invoke();
+                Paused?.Invoke();
             }
         }
 
@@ -71,7 +71,7 @@ namespace miniIT.Arcanoid
             if(levelController.IsStarted)
             {
                 Time.timeScale = 1f;
-                resumed?.Invoke();
+                Resumed?.Invoke();
             }
         }
 

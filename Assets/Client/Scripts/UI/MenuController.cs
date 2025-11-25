@@ -8,9 +8,6 @@ namespace miniIT.Arcanoid
     public class MenuController : MonoBehaviour
     {
         [SerializeField]
-        private AssetReference startScene = default;
-
-        [SerializeField]
         private SoundSet playlist = default;
         [SerializeField]
         private IObjectResolver resolver = default;
@@ -18,15 +15,15 @@ namespace miniIT.Arcanoid
         [Inject]
         public void Inject(IObjectResolver resolver)
         {
-            Debug.Log("Hello?");
             this.resolver = resolver;
             resolver.Resolve<MusicPlayer>().Play(playlist);
         }
 
         public void Play()
         {
-            resolver.Resolve<PlayerService>().ResetPlayer();
-            Addressables.LoadSceneAsync(startScene);
+            PlayerService playerService = resolver.Resolve<PlayerService>();
+            playerService.ResetPlayer();
+            Addressables.LoadSceneAsync(playerService.GetLevel());
         }
 
         public void Exit()

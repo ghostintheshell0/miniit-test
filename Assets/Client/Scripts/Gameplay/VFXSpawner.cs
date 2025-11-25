@@ -37,13 +37,13 @@ namespace miniIT.Arcanoid
 
         private VFXInstance GetFromPool(VFXInstance prefab, Vector3 position, Transform parent = default)
         {
-            if (!pools.ContainsKey(prefab))
+            if(!pools.ContainsKey(prefab))
             {
                 pools[prefab] = new List<VFXInstance>();
             }
 
             VFXInstance instance;
-            if (pools[prefab].Count > 0)
+            if(pools[prefab].Count > 0)
             {
                 instance = pools[prefab].ExtractLast();
                 instance.gameObject.SetActive(true);
@@ -88,9 +88,9 @@ namespace miniIT.Arcanoid
 
         public void ReturnAll()
         {
-            foreach ((VFXInstance instance, VFXInstance prefab) in activeEffects)
+            foreach((VFXInstance instance, VFXInstance prefab) in activeEffects)
             {
-                if (instance != null)
+                if(instance != null)
                 {
                     instance.gameObject.SetActive(false);
                     pools[prefab].Add(instance);

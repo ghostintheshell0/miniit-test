@@ -18,7 +18,12 @@ MonoBehaviour:
   m_GUID: 36bf97945144037bfb347858d279de1b
   m_SerializeEntries:
   - m_GUID: 2cda990e2423bbf4892e6590ba056729
-    m_Address: Assets/Client/Scenes/Game.unity
+    m_Address: Level1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3ac5f42746737544c8d5d18dff14220b
+    m_Address: Level2
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

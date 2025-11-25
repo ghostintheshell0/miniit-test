@@ -13,3 +13,14 @@ MonoBehaviour:
   m_Name: GameConfig
   m_EditorClassIdentifier: 
   menuSceneName: Assets/Client/Scenes/Menu.unity
+  defaultSFXVolume: 0.5
+  defaultMusicvolume: 0.5
+  levels:
+  - m_AssetGUID: 2cda990e2423bbf4892e6590ba056729
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 3ac5f42746737544c8d5d18dff14220b
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 1

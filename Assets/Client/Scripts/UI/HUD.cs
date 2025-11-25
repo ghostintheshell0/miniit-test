@@ -29,8 +29,8 @@ namespace miniIT.Arcanoid
 
         public void Bind(GameController controller)
         {
-            controller.paused += OnPause;
-            controller.resumed += OnResume;
+            controller.Paused += OnPause;
+            controller.Resumed += OnResume;
             AddPauseClickListener(controller.Pause);
             AddResumeClickListener(controller.Resume);
         }

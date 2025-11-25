@@ -58,7 +58,7 @@ namespace miniIT.Arcanoid
                 Vector2 dir = distance.normalized;
                 Vector2 offset = new Vector2((platformSize * size * 0.5f + 0.02f) * dir.x, 0f);
                 RaycastHit2D hit = Physics2D.Raycast(body.position+offset, dir, 0.02f);
-                if (hit.collider == null)
+                if(hit.collider == null)
                 {
                     Vector2 step = dir * maxSpeed * Time.fixedDeltaTime;
                     body.MovePosition(body.position + step);

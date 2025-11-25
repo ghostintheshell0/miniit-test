@@ -221,7 +221,6 @@ namespace miniIT.Arcanoid
         {
             RemoveInputListeners();
             vfxSpawner.ReturnAll();
-            Debug.Log("Bye");
         }
 
         public float BallsSpeed

@@ -5,7 +5,7 @@ namespace miniIT.Arcanoid
 {
     public class KillZone : MonoBehaviour
     {
-        public event Action<Collider2D> ObjectEntered;
+        public event Action<Collider2D> ObjectEntered = default;
 
         private void OnTriggerEnter2D(Collider2D collider)
         {

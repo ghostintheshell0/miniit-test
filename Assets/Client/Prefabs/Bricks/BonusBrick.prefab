@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 748213349355093377, guid: 3fb7a20e7045aa8f5831506e73ca8d09, type: 3}
       propertyPath: m_Color.b
-      value: 0.27612138
+      value: 0.5019608
       objectReference: {fileID: 0}
     - target: {fileID: 748213349355093377, guid: 3fb7a20e7045aa8f5831506e73ca8d09, type: 3}
       propertyPath: m_Color.g
-      value: 0.8018868
+      value: 0.78431374
       objectReference: {fileID: 0}
     - target: {fileID: 748213349355093377, guid: 3fb7a20e7045aa8f5831506e73ca8d09, type: 3}
       propertyPath: m_Color.r
-      value: 0.5124487
+      value: 0.5019608
       objectReference: {fileID: 0}
     - target: {fileID: 1568386734587849873, guid: 3fb7a20e7045aa8f5831506e73ca8d09, type: 3}
       propertyPath: m_Name

@@ -20,20 +20,20 @@ namespace miniIT.Arcanoid
 
         public void Play(SoundSet newPlaylist)
         {
-            if (newPlaylist == null || newPlaylist.clips.Length == 0)
+            if(newPlaylist == null || newPlaylist.clips.Length == 0)
             {
                 return;
             }
 
-            if (playlist == newPlaylist)
+            if(playlist == newPlaylist)
             {
                 return;
             }
 
-            if (playlistRoutine != null)
+            if(playlistRoutine != null)
             {
                 StopCoroutine(playlistRoutine);
-                if (currentSource != null)
+                if(currentSource != null)
                 {
                     StartCoroutine(FadeOutAndStop(currentShot, currentSource, fadeDuration));
                 }
@@ -53,7 +53,7 @@ namespace miniIT.Arcanoid
 
                 currentShot = audioSystem.Play(clip, musicChannel);
                 currentSource = audioSystem.GetSource(currentShot);
-                if (currentSource == null)
+                if(currentSource == null)
                 {
                     yield break;
                 }
