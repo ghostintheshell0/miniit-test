@@ -1,16 +1,11 @@
 using Doozy.Runtime.UIManager.Components;
-using Doozy.Runtime.UIManager.Containers;
 using UnityEngine;
-using UnityEngine.UI;
 using VContainer;
 
 namespace miniIT.Arcanoid
 {
     public class SettingsUI : MonoBehaviour
     {
-        [SerializeField]
-        private UIView screen = default;
-
         [SerializeField]
         private UISlider musicSlider = default;
 

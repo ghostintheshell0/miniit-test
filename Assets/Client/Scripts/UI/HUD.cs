@@ -24,9 +24,6 @@ namespace miniIT.Arcanoid
         [SerializeField]
         private UIButton resume = default;
 
-        private Player player = default;
-
-
         public void Bind(GameController controller)
         {
             controller.Paused += OnPause;
