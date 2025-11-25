@@ -14,4 +14,7 @@ features<br><ul>
 antistuck balls system<br>
 <br>
 audio settings<br>
-music playlists<ul>
+music playlists<ul><br>
+
+[gameplay video](https://github.com/user-attachments/assets/bfca0a4e-5d97-49e8-8247-240c4cc0aa49)
+
