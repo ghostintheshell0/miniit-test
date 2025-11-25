@@ -57,16 +57,19 @@ namespace miniIT.Arcanoid
             musicPlayer = resolver.Resolve<MusicPlayer>();
             audioSystem = resolver.Resolve<AudioSystem>();
             musicPlayer.Play(levelData.LevelValues.playlist);
+            HUD hud = resolver.Resolve<HUD>();
+            hud.Show();
 
-            player = gameController.Player;
             AddInputListeners(playerInput);
 
             balls = new List<Ball>();
             bonuses = new List<BaseBonus>();
+            player = resolver.Resolve<PlayerService>().GetPlayer();
 
             InitBricks();
-            SpawnPlatform();
+            SpawnPlatform(player);
             SpawnBall(player.InitData.startBallPrefab);
+            levelData.CameraFitter.Fit(levelData.MainCamera, levelData);
 
             Time.timeScale = 1f;
 
@@ -124,7 +127,7 @@ namespace miniIT.Arcanoid
             CheckWin();
         }
 
-        public void SpawnPlatform()
+        public void SpawnPlatform(Player player)
         {
             playerPlatform = resolver.Instantiate(player.InitData.platformPrefab, levelData.SpawnPoint.position, levelData.SpawnPoint.rotation);
             playerPlatform.Size = levelData.LevelValues.startPlatformSize;

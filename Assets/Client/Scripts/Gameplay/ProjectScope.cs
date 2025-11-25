@@ -39,6 +39,7 @@ namespace miniIT.Arcanoid
             builder.RegisterInstance(gameConfig);
             builder.RegisterInstance(initPlayerData);
             builder.Register<GameController>(Lifetime.Singleton);
+            builder.Register<PlayerService>(Lifetime.Singleton);
 
             builder.RegisterBuildCallback(OnBuild);
         }

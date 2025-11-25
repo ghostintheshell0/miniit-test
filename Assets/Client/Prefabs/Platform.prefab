@@ -239,21 +239,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e03d58c3d73a76104b98b6bff101625f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player:
-    initData: {fileID: 0}
-    platform: {fileID: 0}
-    scores: 0
-    lifes: 3
-    ballsSpeed: 4
-    ballsSize: 1
   body: {fileID: 3945004077578160395}
   ballsSpawnPoint: {fileID: 88432830592473682}
   launchDirection: {x: 0, y: 1}
   launchAngle: 60
   connectedBalls: []
-  maxSpeed: 5
+  maxSpeed: 10
   stoppongDistance: 0.2
-  speedBonus: 0.46
   minSize: 0.5
   maxSize: 5
   size: 1

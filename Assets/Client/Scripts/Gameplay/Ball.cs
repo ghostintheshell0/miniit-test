@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using VContainer;
 
 namespace miniIT.Arcanoid
 {
@@ -15,7 +16,7 @@ namespace miniIT.Arcanoid
         private Transform pivot = default;
 
         [SerializeField]
-        private TMP_Text DebugField = default;
+        private SoundSet platformHitSound = default;
 
         public float startSpeed = 5f;
         public int Damage = 1;
@@ -29,18 +30,31 @@ namespace miniIT.Arcanoid
         private float scale = 1f;
         [SerializeField]
         private float speed = 1f;
+
+        [Header("antistuck")]
         [SerializeField]
-        private float minYSpeed = 0.1f;
+        private float stuckAngle = 6f;
         [SerializeField]
         private float antiStuckModeDelay = 10f;
+        [SerializeField]
+        private float antiStuckAngle = 7.5f;
 
         [SerializeField]
         private float lastBrickHitTime = float.MinValue;
+
+        private IObjectResolver resolver = default;
 
 
         private void Awake()
         {
             Scale = scale;
+        }
+
+        [Inject]
+        public void Inject(IObjectResolver resolver)
+        {
+            this.resolver = resolver;
+            Speed = resolver.Resolve<LevelController>().BallsSpeed;
         }
 
         protected virtual void OnCollisionEnter2D(Collision2D collision)
@@ -53,6 +67,7 @@ namespace miniIT.Arcanoid
             else if(collision.collider.TryGetComponent(out Platform platform))
             {
                 lastBrickHitTime = Time.fixedTime;
+                resolver.Resolve<AudioSystem>().Play(platformHitSound);
             }
             Speed = speed;
         }
@@ -115,16 +130,34 @@ namespace miniIT.Arcanoid
 
         private void FixedUpdate()
         {
-            DebugField.text = $"{body.velocity.magnitude:F2}";
             if(body.simulated)
             {
-                if(lastBrickHitTime + antiStuckModeDelay < Time.fixedTime)
+                float currentAngle = CurrentAngle;
+                if(lastBrickHitTime + antiStuckModeDelay < Time.fixedTime && Mathf.Abs(currentAngle) < stuckAngle)
                 {
-                    Vector2 velocity = body.velocity;
-                    velocity.y += Mathf.Sign(velocity.y) * minYSpeed * Time.fixedDeltaTime;
+                    float newAngle = Mathf.Sign(currentAngle) * antiStuckAngle;
+                    CurrentAngle = newAngle;
                 }
             }
         }
+
+        private float CurrentAngle
+        {
+            get
+            {
+                Vector2 v = body.velocity;
+                float angle = Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg;
+                return angle;
+            }
+            set
+            {
+                float rad = value * Mathf.Deg2Rad;
+                float x = Mathf.Cos(rad) * speed;
+                float y = Mathf.Sin(rad) * speed;
+                body.velocity = new Vector2(x, y);
+            }
+        }
+
 
         public Rigidbody2D Body
         {

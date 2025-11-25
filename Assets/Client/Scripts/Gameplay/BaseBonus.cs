@@ -21,7 +21,10 @@ namespace miniIT.Arcanoid
             if(collision.TryGetComponent(out Platform platform))
             {
                 Apply(platform);
-                resolver.Resolve<AudioSystem>().Play(pickSound);
+                if(pickSound != default)
+                {
+                    resolver.Resolve<AudioSystem>().Play(pickSound);
+                }
                 Destroy(gameObject);
             }
         }

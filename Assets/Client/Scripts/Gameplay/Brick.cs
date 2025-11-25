@@ -1,6 +1,7 @@
 using System;
 using TriInspector;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using VContainer;
 using VContainer.Unity;
 
@@ -62,6 +63,11 @@ namespace miniIT.Arcanoid
                     Die();
                 }
             }
+        }
+
+        public void Kill()
+        {
+            Die();
         }
 
         public VFXInstance DestroyVFXPrefab => destroyVFXPrefab;

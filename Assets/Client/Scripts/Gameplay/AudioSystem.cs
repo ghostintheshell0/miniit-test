@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using VContainer;
+using VContainer.Unity;
 
 namespace miniIT.Arcanoid
 {
@@ -22,10 +23,12 @@ namespace miniIT.Arcanoid
         private int nextId = 1;
         private Dictionary<int, AudioSource> activeShots = new Dictionary<int, AudioSource>();
         private Dictionary<string, List<AudioSource>> channelSources = new Dictionary<string, List<AudioSource>>();
+        private IObjectResolver resolver = default;
 
         [Inject]
         public void Inject(IObjectResolver resolver)
         {
+            this.resolver = resolver;
             GameConfig config = resolver.Resolve<GameConfig>();
             SFXVolume = config.defaultSFXVolume;
             MusicVolume = config.defaultMusicvolume;
@@ -59,30 +62,29 @@ namespace miniIT.Arcanoid
             }
 
             if (!channelSources.ContainsKey(settings.channelName))
+            {
                 channelSources[settings.channelName] = new List<AudioSource>();
+            }
 
             List<AudioSource> sources = channelSources[settings.channelName];
 
-            // проверка лимита
             if (sources.Count >= settings.maxSounds)
             {
                 switch (settings.OverrideSoundsBehaviour)
                 {
                     case OverrideSoundsBehaviour.IgnoreNew:
-                        return default; // не создаём новый
+                        return default;
                     case OverrideSoundsBehaviour.StopOld:
                         var oldest = sources[0];
                         StopSource(oldest);
                         sources.RemoveAt(0);
                         break;
                     case OverrideSoundsBehaviour.None:
-                        // просто продолжаем, создаём новый
                         break;
                 }
             }
 
-            // создаём источник
-            AudioSource src = Instantiate(settings.sourcePrefab, transform);
+            AudioSource src = resolver.Instantiate(settings.sourcePrefab, transform);
             src.clip = clip;
             src.outputAudioMixerGroup = settings.group;
             src.Play();

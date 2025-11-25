@@ -15,14 +15,6 @@ namespace miniIT.Arcanoid
         private int scores = 0;
         public int level = 0;
 
-        public Player(InitPlayerData initData)
-        {
-            this.initData = initData;
-            lifes = initData.lifes;
-            scores = initData.startScores;
-            level = initData.startLevel;
-        }
-
         public int Scores
         {
             get => scores;
@@ -57,6 +49,10 @@ namespace miniIT.Arcanoid
             }
         }
 
-        public InitPlayerData InitData => initData;
+        public InitPlayerData InitData
+        {
+            get => initData;
+            set => initData = value;
+        }
     }
 }

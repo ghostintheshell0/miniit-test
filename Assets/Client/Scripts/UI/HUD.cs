@@ -1,6 +1,7 @@
 using System;
 using Doozy.Runtime.UIManager;
 using Doozy.Runtime.UIManager.Components;
+using Doozy.Runtime.UIManager.Containers;
 using TMPro;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ namespace miniIT.Arcanoid
 {
     public class HUD : MonoBehaviour
     {
+        [SerializeField]
+        private UIView screen = default;
         [SerializeField]
         private TMP_Text scores = default;
         [SerializeField]
@@ -52,6 +55,16 @@ namespace miniIT.Arcanoid
         public void ShowScores(int scores)
         {
             this.scores.text = scores.ToString();
+        }
+
+        public void Show()
+        {
+            screen.Show();
+        }
+
+        public void Hide()
+        {
+            screen.Hide();
         }
 
         public void OnPause()

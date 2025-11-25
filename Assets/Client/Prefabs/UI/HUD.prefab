@@ -2320,10 +2320,10 @@ RectTransform:
   - {fileID: 7136362584596376789}
   m_Father: {fileID: 1988231745038481778}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMin: {x: 0.8, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -100, y: 0}
-  m_SizeDelta: {x: 200, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1251504753637697727
 CanvasRenderer:
@@ -2346,7 +2346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.24, g: 0.24, b: 0.24, a: 0.9019608}
+  m_Color: {r: 0.12941177, g: 0.12941177, b: 0.12941177, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7317,6 +7317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78a5d5be1c4040bf68dc72b773dca030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  screen: {fileID: 2597467188780304678}
   scores: {fileID: 8949023914820680893}
   speedFormat: '{0:F2}'
   speed: {fileID: 6960301302809980274}

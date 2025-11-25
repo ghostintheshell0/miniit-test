@@ -28,7 +28,7 @@ namespace miniIT.Arcanoid
         public void Inject(IObjectResolver resolver)
         {
             InitPlayerData initPlayerData = resolver.Resolve<InitPlayerData>();
-            player = new Player(initPlayerData);
+            player = resolver.Resolve<PlayerService>().GetPlayer();
             this.resolver = resolver;
             hud = resolver.Resolve<HUD>();
             hud.Bind(this);
@@ -61,14 +61,6 @@ namespace miniIT.Arcanoid
             loseScreen.Show(player.Scores);
         }
 
-        /*
-       private void Win()
-       {
-           Pause();
-           won?.Invoke(player.Scores);
-           Debug.Log("Win");
-       }*/
-
         public void Pause()
         {
             if(levelController.IsStarted)
@@ -89,6 +81,7 @@ namespace miniIT.Arcanoid
 
         public void ToMenu()
         {
+            hud.Hide();
             SceneManager.LoadScene(gameConfig.menuSceneName);
         }
 
@@ -96,7 +89,5 @@ namespace miniIT.Arcanoid
         {
             SceneManager.LoadScene(gameConfig.menuSceneName);
         }
-
-        public Player Player => player;
     }
 }

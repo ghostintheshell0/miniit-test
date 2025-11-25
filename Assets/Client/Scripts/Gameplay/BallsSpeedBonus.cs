@@ -11,6 +11,7 @@ namespace miniIT.Arcanoid
         [Inject]
         public override void Inject(IObjectResolver resolver)
         {
+            this.resolver = resolver;
             levelController = resolver.Resolve<LevelController>();
         }
 

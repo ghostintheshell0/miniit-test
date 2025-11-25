@@ -10,6 +10,11 @@ namespace miniIT.Arcanoid
         public Vector2 BrickSize;
 
         [SerializeField]
+        private Transform minPoint = default;
+        [SerializeField]
+        private Transform maxPoint = default;
+
+        [SerializeField]
         private KillZone killZone = default;
 
         [SerializeField]
@@ -20,6 +25,9 @@ namespace miniIT.Arcanoid
 
         [SerializeField]
         private LevelValues levelValues = default;
+
+        [SerializeField]
+        private CameraFitter cameraFitter = default;
 
         [Button]
         public void CollectBricks()
@@ -40,17 +48,30 @@ namespace miniIT.Arcanoid
             }
         }
 
-        public KillZone KillZone
+        private void OnDrawGizmos()
         {
-            get => killZone;
+            if(minPoint == default || maxPoint == default)
+            {
+                return;
+            }
+
+            Gizmos.color = Color.green;
+
+            Vector3 p2 = new Vector3(minPoint.position.x, maxPoint.position.y);
+            Vector3 p4 = new Vector3(maxPoint.position.x, minPoint.position.y);
+
+            Gizmos.DrawLine(minPoint.position, p2);
+            Gizmos.DrawLine(p2, maxPoint.position);
+            Gizmos.DrawLine(maxPoint.position, p4);
+            Gizmos.DrawLine(p4, minPoint.position);
         }
 
-        public Transform SpawnPoint
-        {
-            get => spawnPoint;
-        }
-
+        public Transform MinPoint => minPoint;
+        public Transform MaxPoint => maxPoint;
+        public KillZone KillZone => killZone;
+        public Transform SpawnPoint => spawnPoint;
         public Camera MainCamera => mainCamera;
         public LevelValues LevelValues => levelValues;
+        public CameraFitter CameraFitter => cameraFitter;
     }
 }

@@ -8,6 +8,8 @@ namespace miniIT.Arcanoid
     {
         [SerializeField]
         private MenuController menuController = default;
+        [SerializeField]
+        private PlayerService playerService = default;
 
         protected override void Configure(IContainerBuilder builder)
         {

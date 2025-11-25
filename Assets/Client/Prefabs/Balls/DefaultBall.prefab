@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 934885709157442949}
   - component: {fileID: 7737024322810569395}
   m_Layer: 8
-  m_Name: Text (TMP)
-  m_TagString: Untagged
+  m_Name: DebugField
+  m_TagString: EditorOnly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2757697923202599033
 RectTransform:
   m_ObjectHideFlags: 0
@@ -247,6 +247,10 @@ PrefabInstance:
       propertyPath: defaultRadius
       value: 0.225
       objectReference: {fileID: 0}
+    - target: {fileID: 3592283815540921395, guid: 183eb6c13739f09a9899b6e12a846f9f, type: 3}
+      propertyPath: platformHitSound
+      value: 
+      objectReference: {fileID: 11400000, guid: 577c9bdf7d7cee156837735763003528, type: 2}
     - target: {fileID: 8531955672624122846, guid: 183eb6c13739f09a9899b6e12a846f9f, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.225

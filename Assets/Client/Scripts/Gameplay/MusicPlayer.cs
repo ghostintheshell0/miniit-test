@@ -122,6 +122,11 @@ namespace miniIT.Arcanoid
             while (t < duration)
             {
                 t += Time.deltaTime;
+                if(src == default)
+                {
+                    audioSystem.Stop(shot);
+                    yield break;
+                }
                 src.volume = Mathf.Lerp(startVolume, 0f, t / duration);
                 yield return null;
             }
