@@ -10,11 +10,9 @@ namespace miniIT.Arcanoid
         public Camera mainCamera = default;
         public BallsSpeedChanger ballsSpeedChanger = default;
         public LevelData level = default;
-        public InitPlayerData initPlayerData = default;
 
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterInstance(initPlayerData);
             builder.RegisterComponent(level);
             builder.RegisterComponent(mainCamera);
             builder.RegisterComponent(ballsSpeedChanger);

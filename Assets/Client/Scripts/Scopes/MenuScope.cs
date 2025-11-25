@@ -13,7 +13,7 @@ namespace miniIT.Arcanoid
 
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterComponent(menuController);
+       //     builder.RegisterComponent(menuController);
             base.Configure(builder);
         }
     }

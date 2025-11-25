@@ -7,10 +7,6 @@ namespace miniIT.Arcanoid
 {
     public class GameController
     {
-        public event Action<int> lost = default;
-        public event Action<int> won = default;
-        public event Action started = default;
-        public event Action lostBalls = default;
         public event Action paused = default;
         public event Action resumed = default;
 

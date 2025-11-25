@@ -181,6 +181,7 @@ namespace miniIT.Arcanoid
             get => GetChannelVolume(musicGroup, musicGroupName);
             set
             {
+                Debug.Log(value);
                 SetChannelVolume(musicGroup, musicGroupName, value);
             }
         }
